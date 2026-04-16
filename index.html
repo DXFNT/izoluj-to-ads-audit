@@ -1,0 +1,2770 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Izoluj.to — Dexfinity AI Audit Deep</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Questrial&display=swap" rel="stylesheet">
+<style>
+:root {
+  --dex-blue: #0065F7;
+  --dex-navy: #05024E;
+  --dex-white: #ffffff;
+  --dex-light-bg: #F4F6FC;
+  --dex-blue-light: #E8F0FE;
+  --dex-blue-10: rgba(0, 101, 247, 0.1);
+  --dex-blue-20: rgba(0, 101, 247, 0.2);
+  --dex-navy-light: #0A0A6E;
+  --dex-text: #1A1A2E;
+  --dex-muted: #6B7280;
+  --dex-border: #E5E7EB;
+  --dex-teal: #16AB8B;
+  --dex-orange: #ff7f00;
+  --font-primary: 'Questrial', Arial, sans-serif;
+  --font-secondary: 'Poppins', Arial, sans-serif;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --shadow: 0 2px 8px rgba(0, 101, 247, 0.08);
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-secondary);
+  color: var(--dex-text);
+  background: var(--dex-white);
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-primary);
+  line-height: 1.2;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ========== 1. URGENCY BAR ========== */
+.urgency-bar {
+  background: var(--dex-blue);
+  color: var(--dex-white);
+  text-align: center;
+  padding: 10px 24px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-secondary);
+  letter-spacing: 0.2px;
+}
+
+/* ========== 2. NAV ========== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--dex-border);
+  padding: 0 24px;
+}
+
+.nav-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.nav-logo {
+  height: 48px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--dex-text);
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--dex-blue);
+}
+
+.nav-links a.nav-cta {
+  color: var(--dex-blue);
+  font-weight: 700;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 8px;
+  z-index: 201;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--dex-text);
+  transition: all 0.3s;
+  border-radius: 2px;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--dex-white);
+  z-index: 200;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.mobile-overlay.active {
+  display: flex;
+}
+
+.mobile-overlay a {
+  text-decoration: none;
+  color: var(--dex-text);
+  font-size: 20px;
+  font-weight: 500;
+  font-family: var(--font-secondary);
+}
+
+.mobile-overlay a.nav-cta {
+  color: var(--dex-blue);
+  font-weight: 700;
+}
+
+/* ========== 3. HERO ========== */
+.hero {
+  background: var(--dex-navy);
+  color: var(--dex-white);
+  padding: 80px 40px 120px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.hero-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 101, 247, 0.15);
+  pointer-events: none;
+}
+
+.hero-circle-1 {
+  width: 500px;
+  height: 500px;
+  top: -200px;
+  right: -100px;
+}
+
+.hero-circle-2 {
+  width: 350px;
+  height: 350px;
+  bottom: -100px;
+  left: -80px;
+}
+
+.hero-circle-3 {
+  width: 200px;
+  height: 200px;
+  top: 60px;
+  left: 10%;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: var(--dex-blue-20);
+  border: 1px solid var(--dex-blue);
+  color: var(--dex-white);
+  padding: 6px 20px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.hero-tagline {
+  color: var(--dex-blue);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-size: 52px;
+  font-weight: 400;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 span {
+  color: var(--dex-blue);
+}
+
+.hero .sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.75);
+  max-width: 700px;
+  margin: 0 auto 48px;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-stat {
+  text-align: center;
+}
+
+.hero-stat .num {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--dex-white);
+  font-family: var(--font-primary);
+}
+
+.hero-stat .label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  margin-top: 4px;
+}
+
+/* ========== 4. EXECUTIVE SUMMARY ========== */
+.exec-summary {
+  background: var(--dex-white);
+  border-radius: 16px;
+  padding: 32px 40px;
+  margin-top: -32px;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  border: 1px solid var(--dex-border);
+  border-left: 4px solid var(--dex-blue);
+}
+
+.exec-summary h2 {
+  font-size: 22px;
+  margin-bottom: 24px;
+  color: var(--dex-navy);
+}
+
+.exec-finding {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+
+.exec-finding:last-child {
+  margin-bottom: 0;
+}
+
+.exec-finding .icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--dex-white);
+}
+
+.exec-finding .icon.danger {
+  background: #DC2626;
+}
+
+.exec-finding .icon.warning {
+  background: #F59E0B;
+}
+
+.exec-finding .icon.info {
+  background: var(--dex-blue);
+}
+
+.exec-finding .content {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--dex-text);
+}
+
+.exec-finding .content strong {
+  color: var(--dex-navy);
+}
+
+/* ========== 5. HIGHLIGHT BOX ========== */
+.highlight-section {
+  background: var(--dex-navy);
+  color: var(--dex-white);
+  padding: 64px 24px;
+  margin-top: -16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.highlight-section .hero-circle {
+  border-color: rgba(0, 101, 247, 0.1);
+}
+
+.highlight-section h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.highlight-section .sub {
+  text-align: center;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 40px;
+  font-size: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.highlight-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  text-align: center;
+}
+
+.highlight-card .num {
+  font-size: 32px;
+  font-weight: 700;
+  font-family: var(--font-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.highlight-card .num.teal {
+  color: var(--dex-teal);
+}
+
+.highlight-card .num.orange {
+  color: var(--dex-orange);
+}
+
+.highlight-card .kw {
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+  margin-top: 4px;
+}
+
+.highlight-card .market {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 4px;
+}
+
+.highlight-detail {
+  background: var(--dex-blue-10);
+  border-radius: var(--radius-md);
+  padding: 24px 32px;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.85);
+  position: relative;
+  z-index: 1;
+}
+
+.highlight-detail strong {
+  color: var(--dex-white);
+}
+
+/* ========== 6. SEZÓNNOSŤ ========== */
+.section {
+  padding: 64px 24px;
+}
+
+.section.alt {
+  background: var(--dex-light-bg);
+}
+
+.section-title {
+  font-size: 28px;
+  color: var(--dex-navy);
+  margin-bottom: 8px;
+}
+
+.section-sub {
+  color: var(--dex-muted);
+  margin-bottom: 40px;
+  font-size: 14px;
+}
+
+.chart-wrap {
+  background: var(--dex-navy);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  margin-bottom: 32px;
+  overflow: hidden;
+}
+
+.chart-wrap svg {
+  width: 100%;
+  height: auto;
+}
+
+.season-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.season-card {
+  background: var(--dex-white);
+  border: 1px solid var(--dex-border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  text-align: center;
+}
+
+.season-card .label {
+  font-size: 12px;
+  color: var(--dex-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.season-card .value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--dex-navy);
+  font-family: var(--font-primary);
+}
+
+.season-card .desc {
+  font-size: 13px;
+  color: var(--dex-muted);
+  margin-top: 4px;
+}
+
+.season-cta {
+  background: linear-gradient(135deg, var(--dex-orange), #ff9a33);
+  color: var(--dex-white);
+  border-radius: var(--radius-md);
+  padding: 20px 32px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* ========== 7. O KLIENTOVI ========== */
+.metric-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.metric-card {
+  background: var(--dex-white);
+  border: 1px solid var(--dex-border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.metric-card .label {
+  font-size: 11px;
+  color: var(--dex-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.metric-card .value {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dex-navy);
+}
+
+.metric-card.warn .value {
+  color: var(--dex-orange);
+}
+
+.metric-card.dark {
+  background: var(--dex-navy);
+  border-color: var(--dex-navy);
+}
+
+.metric-card.dark .label {
+  color: rgba(255,255,255,0.5);
+}
+
+.metric-card.dark .value {
+  color: var(--dex-white);
+  font-size: 14px;
+}
+
+/* ========== 8. MARKET TABLE ========== */
+.market-table, .audit-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 32px;
+  font-size: 14px;
+}
+
+.market-table th, .audit-table th {
+  background: var(--dex-light-bg);
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--dex-muted);
+  border-bottom: 2px solid var(--dex-border);
+}
+
+.market-table td, .audit-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--dex-border);
+  font-variant-numeric: tabular-nums;
+}
+
+.market-table tr:hover, .audit-table tr:hover {
+  background: var(--dex-blue-10);
+}
+
+.market-table tr.highlight-row {
+  background: rgba(255, 127, 0, 0.06);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.status-badge.warning {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+.status-badge.critical {
+  background: #FEE2E2;
+  color: #991B1B;
+}
+
+.status-badge.positive {
+  background: #D1FAE5;
+  color: #065F46;
+}
+
+.status-badge.info {
+  background: var(--dex-blue-light);
+  color: var(--dex-blue);
+}
+
+.badge-warning {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+.badge-positive {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #D1FAE5;
+  color: #065F46;
+}
+
+.badge-critical {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #FEE2E2;
+  color: #991B1B;
+}
+
+.badge-info {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--dex-blue-light);
+  color: var(--dex-blue);
+}
+
+/* ========== BAR CHART ========== */
+.bar-chart {
+  margin-bottom: 32px;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.bar-row .bar-label {
+  width: 140px;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: right;
+  flex-shrink: 0;
+  color: var(--dex-text);
+}
+
+.bar-row .bar-track {
+  flex: 1;
+  height: 32px;
+  background: var(--dex-light-bg);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+}
+
+.bar-row .bar-fill {
+  height: 100%;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--dex-white);
+  transition: width 0.6s ease;
+}
+
+.bar-fill.navy { background: var(--dex-navy); }
+.bar-fill.blue { background: var(--dex-blue); }
+.bar-fill.teal { background: var(--dex-teal); }
+.bar-fill.orange { background: var(--dex-orange); }
+.bar-fill.red { background: #DC2626; }
+.bar-fill.muted { background: var(--dex-muted); }
+
+.bar-fill.dashed {
+  background: transparent;
+  border: 2px dashed var(--dex-orange);
+  color: var(--dex-orange);
+}
+
+.bar-row .bar-value {
+  width: 80px;
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--dex-text);
+  flex-shrink: 0;
+}
+
+/* ========== HIGHLIGHT BOXES ========== */
+.highlight-positive {
+  background: #D1FAE5;
+  border-left: 4px solid var(--dex-teal);
+  border-radius: var(--radius-sm);
+  padding: 16px 24px;
+  font-size: 14px;
+  color: #065F46;
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+
+.highlight-negative {
+  background: #FEE2E2;
+  border-left: 4px solid #DC2626;
+  border-radius: var(--radius-sm);
+  padding: 16px 24px;
+  font-size: 14px;
+  color: #991B1B;
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+
+.highlight-warning {
+  background: #FEF3C7;
+  border-left: 4px solid var(--dex-orange);
+  border-radius: var(--radius-sm);
+  padding: 16px 24px;
+  font-size: 14px;
+  color: #92400E;
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+
+.highlight-neutral {
+  background: var(--dex-blue-light);
+  border-left: 4px solid var(--dex-blue);
+  border-radius: var(--radius-sm);
+  padding: 16px 24px;
+  font-size: 14px;
+  color: var(--dex-navy);
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+
+/* ========== FINDINGS ========== */
+.finding {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+
+.finding .severity-bar {
+  width: 4px;
+  min-height: 48px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+.severity-bar.high { background: #DC2626; }
+.severity-bar.med { background: var(--dex-orange); }
+.severity-bar.low { background: var(--dex-teal); }
+.severity-bar.positive { background: var(--dex-teal); }
+
+.finding .finding-content {
+  flex: 1;
+}
+
+.finding .finding-content .finding-title {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--dex-navy);
+  margin-bottom: 4px;
+}
+
+.finding .finding-content .finding-desc {
+  font-size: 13px;
+  color: var(--dex-muted);
+  line-height: 1.6;
+}
+
+.rec-box {
+  background: var(--dex-blue-light);
+  border-radius: var(--radius-sm);
+  padding: 14px 20px;
+  font-size: 13px;
+  color: var(--dex-navy);
+  margin-top: 12px;
+  line-height: 1.6;
+  border-left: 3px solid var(--dex-blue);
+}
+
+/* ========== CATEGORY HEADERS ========== */
+.cat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  margin-top: 40px;
+}
+
+.cat-header .flag {
+  font-size: 24px;
+}
+
+.cat-header h3 {
+  font-size: 20px;
+  color: var(--dex-navy);
+}
+
+/* ========== SUMMARY BOX ========== */
+.summary-section {
+  background: var(--dex-navy);
+  color: var(--dex-white);
+  padding: 64px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.summary-section h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.summary-item {
+  text-align: center;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-md);
+  padding: 28px 20px;
+}
+
+.summary-item .score {
+  font-size: 36px;
+  font-weight: 700;
+  font-family: var(--font-primary);
+  color: var(--dex-blue);
+}
+
+.summary-item .title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 8px 0 4px;
+}
+
+.summary-item .desc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ========== ODPORÚČANIA TIMELINE ========== */
+.rec-timeline {
+  position: relative;
+  padding-left: 40px;
+  margin-top: 40px;
+}
+
+.rec-timeline::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--dex-border);
+}
+
+.rec-step {
+  position: relative;
+  margin-bottom: 40px;
+  padding-left: 24px;
+}
+
+.rec-step::before {
+  content: '';
+  position: absolute;
+  left: -32px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--dex-blue);
+  border: 3px solid var(--dex-white);
+  box-shadow: 0 0 0 2px var(--dex-blue);
+}
+
+.rec-step .step-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--dex-blue);
+  margin-bottom: 4px;
+}
+
+.rec-step .step-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--dex-navy);
+  margin-bottom: 8px;
+  font-family: var(--font-primary);
+}
+
+.rec-step .step-desc {
+  font-size: 14px;
+  color: var(--dex-muted);
+  line-height: 1.7;
+}
+
+/* ========== LOCKED SECTIONS ========== */
+.locked-banner {
+  background: linear-gradient(135deg, var(--dex-blue), #3B82F6);
+  color: var(--dex-white);
+  text-align: center;
+  padding: 20px 24px;
+  border-radius: var(--radius-lg);
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.locked-card {
+  background: var(--dex-white);
+  border: 1px solid var(--dex-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+}
+
+.locked-content {
+  padding: 32px;
+  text-align: center;
+  position: relative;
+  min-height: 200px;
+}
+
+.locked-content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.95) 70%);
+  z-index: 1;
+}
+
+.locked-blur {
+  filter: blur(6px);
+  opacity: 0.4;
+  padding: 20px;
+  font-size: 14px;
+  line-height: 2;
+  color: var(--dex-muted);
+}
+
+.locked-overlay {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  text-align: center;
+}
+
+.locked-overlay .lock-icon {
+  margin-bottom: 12px;
+}
+
+.locked-overlay h3 {
+  font-size: 18px;
+  color: var(--dex-navy);
+  margin-bottom: 4px;
+}
+
+.locked-overlay p {
+  font-size: 13px;
+  color: var(--dex-muted);
+  margin-bottom: 16px;
+  max-width: 300px;
+}
+
+.locked-overlay .unlock-badge {
+  display: inline-block;
+  background: var(--dex-blue);
+  color: var(--dex-white);
+  padding: 8px 24px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.locked-overlay .unlock-badge:hover {
+  background: var(--dex-navy);
+}
+
+/* ========== PRICING ========== */
+.pricing-section {
+  background: var(--dex-navy);
+  color: var(--dex-white);
+  padding: 64px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-section .hero-circle {
+  border-color: rgba(0, 101, 247, 0.1);
+}
+
+.pricing-context {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.pricing-context-item {
+  text-align: center;
+}
+
+.pricing-context-item .ctx-value {
+  font-size: 28px;
+  font-weight: 700;
+  font-family: var(--font-primary);
+}
+
+.pricing-context-item .ctx-value.white { color: var(--dex-white); }
+.pricing-context-item .ctx-value.orange { color: var(--dex-orange); }
+.pricing-context-item .ctx-value.teal { color: var(--dex-teal); }
+
+.pricing-context-item .ctx-label {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 4px;
+}
+
+.pricing-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.flip-card {
+  perspective: 1000px;
+  height: 520px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flip-card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.flip-card-front {
+  background: var(--dex-white);
+  color: var(--dex-text);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.flip-card-front.featured {
+  border: 2px solid var(--dex-blue);
+}
+
+.flip-card-back {
+  background: var(--dex-white);
+  color: var(--dex-text);
+  padding: 28px;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.featured-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--dex-blue);
+  color: var(--dex-white);
+  padding: 4px 14px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--dex-navy);
+  margin-bottom: 16px;
+  font-family: var(--font-primary);
+}
+
+.card-old-price {
+  font-size: 14px;
+  color: var(--dex-muted);
+  text-decoration: line-through;
+  margin-bottom: 4px;
+}
+
+.card-price {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--dex-navy);
+  margin-bottom: 4px;
+  font-family: var(--font-primary);
+}
+
+.card-price-note {
+  font-size: 12px;
+  color: var(--dex-muted);
+  margin-bottom: 24px;
+}
+
+.card-features {
+  list-style: none;
+  margin-bottom: 24px;
+  flex: 1;
+}
+
+.card-features li {
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--dex-text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-features li::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  background: var(--dex-teal);
+  border-radius: 50%;
+  flex-shrink: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white'%3E%3Cpath d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z'/%3E%3C/svg%3E");
+  background-size: 12px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-secondary);
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.btn-primary {
+  background: var(--dex-blue);
+  color: var(--dex-white);
+}
+
+.btn-primary:hover {
+  background: var(--dex-navy);
+}
+
+.btn-secondary {
+  background: var(--dex-light-bg);
+  color: var(--dex-navy);
+  border: 1px solid var(--dex-border);
+}
+
+.btn-secondary:hover {
+  background: var(--dex-blue-light);
+}
+
+/* Flip card back styles */
+.iban-box {
+  background: var(--dex-light-bg);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.iban-box .iban-label {
+  font-size: 11px;
+  color: var(--dex-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.iban-box .iban-value {
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--dex-navy);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.copy-btn {
+  background: var(--dex-blue);
+  color: var(--dex-white);
+  border: none;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: var(--font-secondary);
+  font-weight: 600;
+}
+
+.copy-btn:hover {
+  background: var(--dex-navy);
+}
+
+.process-box {
+  background: var(--dex-blue-light);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--dex-navy);
+}
+
+.process-box strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.contact-info {
+  font-size: 13px;
+  color: var(--dex-muted);
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+
+.back-btn {
+  background: none;
+  border: 1px solid var(--dex-border);
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: var(--font-secondary);
+  color: var(--dex-text);
+  width: 100%;
+}
+
+.back-btn:hover {
+  background: var(--dex-light-bg);
+}
+
+.pricing-note {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.pricing-contact {
+  text-align: center;
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  margin-top: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.pricing-contact a {
+  color: var(--dex-blue);
+  text-decoration: none;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  background: var(--dex-navy);
+  color: rgba(255,255,255,0.5);
+  padding: 48px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer img {
+  height: 64px;
+  margin-bottom: 16px;
+}
+
+.footer p {
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.footer .go-beyond {
+  color: var(--dex-blue);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 16px;
+}
+
+/* ========== STE TU DOT ========== */
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.5); }
+  50% { box-shadow: 0 0 0 8px rgba(220, 38, 38, 0); }
+}
+
+.ste-tu-dot {
+  animation: pulse 2s infinite;
+}
+
+/* ========== TABLE SCROLL ========== */
+.table-scroll {
+  overflow-x: auto;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  .hero { padding: 48px 20px 80px; }
+  .hero h1 { font-size: 30px; }
+  .hero .sub { font-size: 14px; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .hero-stat .num { font-size: 28px; }
+
+  .exec-summary { padding: 24px; margin-top: -24px; }
+
+  .highlight-grid { grid-template-columns: repeat(2, 1fr); }
+  .highlight-section h2 { font-size: 22px; }
+
+  .metric-cards { grid-template-columns: repeat(2, 1fr); }
+  .season-cards { grid-template-columns: 1fr; }
+  .summary-grid { grid-template-columns: repeat(2, 1fr); }
+  .pricing-cards { grid-template-columns: 1fr; }
+  .pricing-context { grid-template-columns: 1fr; gap: 16px; }
+
+  .section-title { font-size: 22px; }
+  .bar-row .bar-label { width: 100px; font-size: 11px; }
+
+  .market-table, .audit-table { font-size: 12px; }
+  .market-table th, .audit-table th,
+  .market-table td, .audit-table td { padding: 8px; }
+
+  .flip-card { height: 560px; }
+}
+
+/* ========== PRINT ========== */
+@media print {
+  .urgency-bar { display: none; }
+  .nav { position: static; box-shadow: none; border: none; }
+  .hamburger { display: none; }
+  .locked-card { display: none; }
+  .locked-banner { display: none; }
+  .pricing-section { display: none; }
+  .season-cta { display: none; }
+  .btn { display: none; }
+  .hero { padding: 40px 20px 60px; }
+  body { font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== 1. URGENCY BAR ========== -->
+<div class="urgency-bar">
+  4 trhy, 70K+ mesačných vyhľadávaní, produkt na webe — Identifikovali sme quick wins pre SK aj expanziu do CZ, PL a DE
+</div>
+
+<!-- ========== 2. NAV ========== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <img src="https://www.dexfinity.com/wp-content/uploads/2021/03/Logo-Small-Light-Landscape@2x.png" alt="Dexfinity" class="nav-logo">
+    <ul class="nav-links">
+      <li><a href="#markets">Trhy</a></li>
+      <li><a href="#seo">SEO Analýza</a></li>
+      <li><a href="#competition">Konkurencia</a></li>
+      <li><a href="#backlinks">Backlinky</a></li>
+      <li><a href="#expansion">Expanzia</a></li>
+      <li><a href="#findings">Odporúčania</a></li>
+      <li><a href="#pricing" class="nav-cta">Cenová ponuka</a></li>
+    </ul>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile overlay -->
+<div class="mobile-overlay" id="mobileMenu">
+  <a href="#markets">Trhy</a>
+  <a href="#seo">SEO Analýza</a>
+  <a href="#competition">Konkurencia</a>
+  <a href="#backlinks">Backlinky</a>
+  <a href="#expansion">Expanzia</a>
+  <a href="#findings">Odporúčania</a>
+  <a href="#pricing" class="nav-cta">Cenová ponuka</a>
+</div>
+
+<!-- ========== 3. HERO ========== -->
+<section class="hero">
+  <div class="hero-circle hero-circle-1"></div>
+  <div class="hero-circle hero-circle-2"></div>
+  <div class="hero-circle hero-circle-3"></div>
+  <div class="hero-badge">External Ads Audit — 690&#8364;</div>
+  <div class="hero-tagline">Go Beyond</div>
+  <h1>Izoluj<span>.to</span><br><span>Multi-trh SEO &amp; Ads Audit</span></h1>
+  <p class="sub">Slovenský eshop s materiálmi na hydroizolácie, epoxidové podlahy a strechy. Ponúka materiál aj realizácie. Plánuje expanziu do CZ, PL a DE.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="num">44</div>
+      <div class="label">Organic Keywords (SK)</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">584</div>
+      <div class="label">Organic Traffic / mes</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">4 trhy</div>
+      <div class="label">SK, CZ, PL, DE potenciál</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">70K+</div>
+      <div class="label">Search dopyt naprieč trhmi</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 4. EXECUTIVE SUMMARY ========== -->
+<div class="container">
+  <div class="exec-summary">
+    <h2>Kde vidíme najrýchlejšie príležitosti</h2>
+    <div class="exec-finding">
+      <div class="icon danger">1</div>
+      <div class="content"><strong>Kritický pokles organic traffic &#8722;64%:</strong> Z 1,844 (dec 2025) na 588 (apr 2026). Okamžitá diagnostika v GSC — manuálne akcie, indexácia, crawl errory.</div>
+    </div>
+    <div class="exec-finding">
+      <div class="icon danger">2</div>
+      <div class="content"><strong>Backlink profil znečistený spamom:</strong> 30%+ referring domains sú spam siete (buybacklinks.agency, seoexpress.org). Disavow urgentný.</div>
+    </div>
+    <div class="exec-finding">
+      <div class="icon warning">3</div>
+      <div class="content"><strong>Produkt na webe, dopyt existuje, kampaň chýba:</strong> "Epoxidová podlaha" 2,000/mes CZ, "wylewka samopoziomująca" 22,000/mes PL — 0 pokrytie na týchto trhoch.</div>
+    </div>
+    <div class="exec-finding">
+      <div class="icon info">4</div>
+      <div class="content"><strong>CZ je quick win, PL/DE sú strednodobé:</strong> CZ jazyk takmer zhodný, KD 0-1. PL má 5.7× väčší trh. DE má najvyššie CPC (&#8364;0.45-1.40).</div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 5. HIGHLIGHT BOX ========== -->
+<section class="highlight-section">
+  <div class="hero-circle hero-circle-1"></div>
+  <div class="hero-circle hero-circle-2"></div>
+  <h2>Produkt &#215; Dopyt &#215; Bez pokrytia = Príležitosť</h2>
+  <p class="sub">Identifikovali sme 4 trhy kde existuje dopyt pre vaše produkty</p>
+  <div class="highlight-grid">
+    <div class="highlight-card">
+      <div class="num teal">1,400</div>
+      <div class="kw">epoxidova podlaha</div>
+      <div class="market">SK /mes — Pos 5, nie TOP 3</div>
+    </div>
+    <div class="highlight-card">
+      <div class="num teal">2,000</div>
+      <div class="kw">epoxidova podlaha</div>
+      <div class="market">CZ /mes — 0 pokrytie</div>
+    </div>
+    <div class="highlight-card">
+      <div class="num orange">22,000</div>
+      <div class="kw">wylewka samopoziom.</div>
+      <div class="market">PL /mes — 0 pokrytie</div>
+    </div>
+    <div class="highlight-card">
+      <div class="num orange">16,000</div>
+      <div class="kw">Epoxidharz Boden</div>
+      <div class="market">DE /mes — 0 pokrytie</div>
+    </div>
+  </div>
+  <div class="highlight-detail">
+    <strong>Quick Win:</strong> Na SK už rankujete na "epoxidová podlaha" (pos 5) — push do TOP 3 prinesie +80 návštev/mes. <strong>CZ</strong> je najlogickejší prvý krok: jazyk takmer zhodný, KD 0-1, traffic potenciál 1,700 len pre jedno keyword. <strong>PL</strong> má 5.7× väčší trh (22K/mes), ale vyžaduje plnú lokalizáciu. <strong>DE</strong> má najvyššie CPC = najvyššia hodnota organického trafficu.
+  </div>
+</section>
+
+<!-- ========== 6. SEZÓNNOSŤ ========== -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Sezónnosť — stavebná sezóna</h2>
+    <p class="section-sub">Peaks jar (Mar-Jún) a jeseň (Sep-Nov). Momentálne ste v peak sezóne s minimálnou viditeľnosťou.</p>
+
+    <div class="chart-wrap">
+      <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Grid lines -->
+        <line x1="60" y1="40" x2="760" y2="40" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <line x1="60" y1="100" x2="760" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <line x1="60" y1="160" x2="760" y2="160" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <line x1="60" y1="220" x2="760" y2="220" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+
+        <!-- Y axis labels -->
+        <text x="50" y="44" fill="rgba(255,255,255,0.4)" font-size="10" text-anchor="end" font-family="Poppins">10K</text>
+        <text x="50" y="104" fill="rgba(255,255,255,0.4)" font-size="10" text-anchor="end" font-family="Poppins">7.5K</text>
+        <text x="50" y="164" fill="rgba(255,255,255,0.4)" font-size="10" text-anchor="end" font-family="Poppins">5K</text>
+        <text x="50" y="224" fill="rgba(255,255,255,0.4)" font-size="10" text-anchor="end" font-family="Poppins">2.5K</text>
+
+        <!-- X axis labels -->
+        <text x="118" y="265" fill="rgba(255,255,255,0.4)" font-size="10" text-anchor="middle" font-family="Poppins">Jan</text>
+        <text x="176" y="265" fill="rgba(255,255,255,0.4)" font-size="10" text-anchor="middle" font-family="Poppins">Feb</text>
+        <text x="234" y="265" fill="rgba(255,255,255,0.4)" font-size="10" text-anchor="middle" font-family="Poppins">Mar</text>
+        <text x="292" y="265" fill="rgba(255,255,255,0.4)" font-size="10" text-anchor="middle" font-family="Poppins">Apr</text>
+        <text x="350" y="265" fill="rgba(255,255,255,0.4)" font-size="10" text-anchor="middle" font-family="Poppins">May</text>
+        <text x="408" y="265" fill="rgba(255,255,255,0.4)" font-size="10" text-anchor="middle" font-family="Poppins">Jun</text>
+        <text x="466" y="265" fill="rgba(255,255,255,0.4)" font-size="10" text-anchor="middle" font-family="Poppins">Jul</text>
+        <text x="524" y="265" fill="rgba(255,255,255,0.4)" font-size="10" text-anchor="middle" font-family="Poppins">Aug</text>
+        <text x="582" y="265" fill="rgba(255,255,255,0.4)" font-size="10" text-anchor="middle" font-family="Poppins">Sep</text>
+        <text x="640" y="265" fill="rgba(255,255,255,0.4)" font-size="10" text-anchor="middle" font-family="Poppins">Oct</text>
+        <text x="698" y="265" fill="rgba(255,255,255,0.4)" font-size="10" text-anchor="middle" font-family="Poppins">Nov</text>
+        <text x="756" y="265" fill="rgba(255,255,255,0.4)" font-size="10" text-anchor="middle" font-family="Poppins">Dec</text>
+
+        <!-- hydroizolácia SK (teal, main) -->
+        <polyline fill="none" stroke="#16AB8B" stroke-width="2.5"
+          points="118,200 176,180 234,120 292,80 350,60 408,70 466,130 524,150 582,100 640,80 698,90 756,170"/>
+
+        <!-- hydroizolace CZ (blue, dashed) -->
+        <polyline fill="none" stroke="#0065F7" stroke-width="2" stroke-dasharray="6,4"
+          points="118,190 176,170 234,110 292,70 350,50 408,60 466,120 524,140 582,90 640,70 698,80 756,160"/>
+
+        <!-- Abdichtung DE (orange) -->
+        <polyline fill="none" stroke="#ff7f00" stroke-width="2"
+          points="118,180 176,165 234,100 292,65 350,45 408,55 466,110 524,130 582,85 640,65 698,75 756,150"/>
+
+        <!-- STE TU dot on April -->
+        <circle cx="292" cy="80" r="6" fill="#DC2626" class="ste-tu-dot"/>
+        <text x="292" y="68" fill="#DC2626" font-size="10" font-weight="700" text-anchor="middle" font-family="Poppins">STE TU</text>
+
+        <!-- Legend -->
+        <line x1="100" y1="285" x2="130" y2="285" stroke="#16AB8B" stroke-width="2.5"/>
+        <text x="135" y="289" fill="rgba(255,255,255,0.6)" font-size="10" font-family="Poppins">hydroizolácia SK</text>
+
+        <line x1="280" y1="285" x2="310" y2="285" stroke="#0065F7" stroke-width="2" stroke-dasharray="6,4"/>
+        <text x="315" y="289" fill="rgba(255,255,255,0.6)" font-size="10" font-family="Poppins">hydroizolace CZ</text>
+
+        <line x1="440" y1="285" x2="470" y2="285" stroke="#ff7f00" stroke-width="2"/>
+        <text x="475" y="289" fill="rgba(255,255,255,0.6)" font-size="10" font-family="Poppins">Abdichtung DE</text>
+      </svg>
+    </div>
+
+    <div class="season-cards">
+      <div class="season-card">
+        <div class="label">Sezóna</div>
+        <div class="value">Jar 2026</div>
+        <div class="desc">Stavebná sezóna — peak dopyt</div>
+      </div>
+      <div class="season-card">
+        <div class="label">Celkový dopyt</div>
+        <div class="value">70K+</div>
+        <div class="desc">mesačných vyhľadávaní</div>
+      </div>
+      <div class="season-card">
+        <div class="label">Aktuálny zachyt</div>
+        <div class="value">~600</div>
+        <div class="desc">aktuálny zachytený traffic</div>
+      </div>
+    </div>
+
+    <div class="season-cta">
+      Stavebná sezóna beží — každý deň bez viditeľnosti = stratené objednávky
+    </div>
+  </div>
+</section>
+
+<!-- ========== 7. O KLIENTOVI ========== -->
+<section class="section alt">
+  <div class="container">
+    <h2 class="section-title">O klientovi</h2>
+    <p class="section-sub">Základné informácie o izoluj.to</p>
+    <div class="metric-cards">
+      <div class="metric-card">
+        <div class="label">Typ</div>
+        <div class="value">Eshop + Realizácie</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Segment</div>
+        <div class="value">Hydroizolácie, epoxidové podlahy, strechy</div>
+      </div>
+      <div class="metric-card warn">
+        <div class="label">Trhy</div>
+        <div class="value">SK (100% trafficu)</div>
+      </div>
+      <div class="metric-card dark">
+        <div class="label">Pain</div>
+        <div class="value">Expanzia do zahraničia — chýba CZ/PL/DE web verzia</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 8. MULTI-MARKET DASHBOARD ========== -->
+<section class="section" id="markets">
+  <div class="container">
+    <h2 class="section-title">Prehľad trhov — aktuálny stav a potenciál</h2>
+    <p class="section-sub">Porovnanie štyroch trhov podľa organickej viditeľnosti a dopytu</p>
+
+    <div class="table-scroll">
+      <table class="market-table">
+        <thead>
+          <tr>
+            <th>Trh</th>
+            <th>Org. KW</th>
+            <th>Org. Traffic</th>
+            <th>DR</th>
+            <th>Top Volume KW</th>
+            <th>Search Volume</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>SK</strong></td>
+            <td>44</td>
+            <td>584</td>
+            <td>12</td>
+            <td>epoxidova podlaha</td>
+            <td>1,500</td>
+            <td><span class="status-badge warning">Klesajúci</span></td>
+          </tr>
+          <tr>
+            <td><strong>CZ</strong></td>
+            <td>0</td>
+            <td>0</td>
+            <td>—</td>
+            <td>epoxidova podlaha</td>
+            <td>2,000</td>
+            <td><span class="status-badge critical">Bez pokrytia</span></td>
+          </tr>
+          <tr>
+            <td><strong>PL</strong></td>
+            <td>0</td>
+            <td>0</td>
+            <td>—</td>
+            <td>wylewka samopoziomujaca</td>
+            <td>22,000</td>
+            <td><span class="status-badge critical">Bez pokrytia</span></td>
+          </tr>
+          <tr>
+            <td><strong>DE</strong></td>
+            <td>0</td>
+            <td>0</td>
+            <td>—</td>
+            <td>Epoxidharz Boden</td>
+            <td>16,000</td>
+            <td><span class="status-badge critical">Bez pokrytia</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:18px; color:var(--dex-navy); margin-bottom:20px;">Celkový search volume podľa trhu</h3>
+
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">PL</div>
+        <div class="bar-track">
+          <div class="bar-fill navy" style="width:100%">36,940</div>
+        </div>
+        <div class="bar-value">36,940</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">DE</div>
+        <div class="bar-track">
+          <div class="bar-fill blue" style="width:80%">29,600</div>
+        </div>
+        <div class="bar-value">29,600</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">CZ</div>
+        <div class="bar-track">
+          <div class="bar-fill teal" style="width:17%">6,430</div>
+        </div>
+        <div class="bar-value">6,430</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">SK</div>
+        <div class="bar-track">
+          <div class="bar-fill orange" style="width:15%">5,450</div>
+        </div>
+        <div class="bar-value">5,450</div>
+      </div>
+    </div>
+
+    <div class="highlight-positive">
+      SK trh má DR 12 a 44 keywords v indexe — základ existuje. CZ, PL a DE sú kompletne nepokryté = čistý potenciál.
+    </div>
+  </div>
+</section>
+
+<!-- ========== 9. SEO ANALÝZA ========== -->
+<section class="section alt" id="seo">
+  <div class="container">
+    <h2 class="section-title">Organická viditeľnosť — SK trh</h2>
+    <p class="section-sub">Traffic trend a top keywords za posledných 5 mesiacov</p>
+
+    <h3 style="font-size:18px; color:var(--dex-navy); margin-bottom:20px;">Traffic Trend</h3>
+
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">Dec 2025</div>
+        <div class="bar-track">
+          <div class="bar-fill navy" style="width:100%">1,844</div>
+        </div>
+        <div class="bar-value">1,844</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Jan 2026</div>
+        <div class="bar-track">
+          <div class="bar-fill blue" style="width:89%">1,647</div>
+        </div>
+        <div class="bar-value">1,647</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Feb 2026</div>
+        <div class="bar-track">
+          <div class="bar-fill orange" style="width:55%">1,009</div>
+        </div>
+        <div class="bar-value">1,009</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Mar 2026</div>
+        <div class="bar-track">
+          <div class="bar-fill orange" style="width:50%">929</div>
+        </div>
+        <div class="bar-value">929</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Apr 2026</div>
+        <div class="bar-track">
+          <div class="bar-fill dashed" style="width:32%">588</div>
+        </div>
+        <div class="bar-value">588</div>
+      </div>
+    </div>
+
+    <div class="highlight-negative">
+      Pokles &#8722;64% za 4 mesiace. Urgentná diagnostika: GSC manuálne akcie, indexácia, Core Web Vitals, Google algorithm updates (Feb-Mar 2026).
+    </div>
+
+    <h3 style="font-size:18px; color:var(--dex-navy); margin: 32px 0 20px;">Top Keywords</h3>
+
+    <div class="table-scroll">
+      <table class="audit-table">
+        <thead>
+          <tr>
+            <th>Keyword</th>
+            <th>Volume</th>
+            <th>Pozícia</th>
+            <th>Traffic</th>
+            <th>Príležitosť</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>epoxidova podlaha</td>
+            <td>1,400</td>
+            <td><span class="badge-warning">5</span></td>
+            <td>118</td>
+            <td>Push do TOP 3</td>
+          </tr>
+          <tr>
+            <td>hydroizolacia</td>
+            <td>1,000</td>
+            <td><span class="badge-positive">3</span></td>
+            <td>90</td>
+            <td>Udržať</td>
+          </tr>
+          <tr>
+            <td>epox. podlaha do garaze cena</td>
+            <td>60</td>
+            <td><span class="badge-positive">TOP 1</span></td>
+            <td>47</td>
+            <td>Udržať</td>
+          </tr>
+          <tr>
+            <td>samonivelacny poter</td>
+            <td>300</td>
+            <td><span class="badge-positive">3</span></td>
+            <td>41</td>
+            <td>Udržať</td>
+          </tr>
+          <tr>
+            <td>izolacia strechy</td>
+            <td>400</td>
+            <td><span class="badge-warning">5</span></td>
+            <td>40</td>
+            <td>Push do TOP 3</td>
+          </tr>
+          <tr>
+            <td>oprava plechovej strechy</td>
+            <td>80</td>
+            <td><span class="badge-positive">TOP 1</span></td>
+            <td>36</td>
+            <td>Udržať</td>
+          </tr>
+          <tr>
+            <td>hydroizolacia strechy</td>
+            <td>100</td>
+            <td><span class="badge-positive">2</span></td>
+            <td>21</td>
+            <td>Udržať</td>
+          </tr>
+          <tr>
+            <td>bitumenova paska</td>
+            <td>300</td>
+            <td><span class="badge-warning">8</span></td>
+            <td>16</td>
+            <td>Push do TOP 5</td>
+          </tr>
+          <tr>
+            <td>oprava strechy</td>
+            <td>250</td>
+            <td><span class="badge-warning">9</span></td>
+            <td>7</td>
+            <td>Nový obsah</td>
+          </tr>
+          <tr>
+            <td>hydroizolacny nater</td>
+            <td>150</td>
+            <td><span class="badge-critical">12</span></td>
+            <td>3</td>
+            <td>Nový obsah</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="finding" style="margin-top:24px;">
+      <div class="severity-bar med"></div>
+      <div class="finding-content">
+        <div class="finding-title">Quick win keywords</div>
+        <div class="finding-desc">Push "epoxidová podlaha" z pos 5&#8594;3 (+80 návštev), "izolacia strechy" z 5&#8594;3 (+30), "bitumenová páska" z 8&#8594;5 (+20).</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 10. KONKURENCIA ========== -->
+<section class="section" id="competition">
+  <div class="container">
+    <h2 class="section-title">Konkurencia — SK trh</h2>
+    <p class="section-sub">Porovnanie s priamymi a nepriamymi konkurentmi</p>
+
+    <div class="table-scroll">
+      <table class="audit-table">
+        <thead>
+          <tr>
+            <th>Konkurent</th>
+            <th>Spoločné KW</th>
+            <th>Celkom KW</th>
+            <th>Traffic</th>
+            <th>DR</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-row">
+            <td><strong style="color:var(--dex-orange);">izoluj.to</strong></td>
+            <td>—</td>
+            <td>44</td>
+            <td>584</td>
+            <td>12</td>
+            <td><span class="badge-critical">Potrebuje rásť</span></td>
+          </tr>
+          <tr>
+            <td>stopvode.sk</td>
+            <td>18</td>
+            <td>66</td>
+            <td>1,817</td>
+            <td>14</td>
+            <td><span class="badge-warning">Priamy konkurent</span></td>
+          </tr>
+          <tr>
+            <td>efarby.sk</td>
+            <td>14</td>
+            <td>1,235</td>
+            <td>19,617</td>
+            <td>44</td>
+            <td><span class="badge-info">Veľký hráč</span></td>
+          </tr>
+          <tr>
+            <td>farlesk.sk</td>
+            <td>13</td>
+            <td>1,013</td>
+            <td>15,758</td>
+            <td>51</td>
+            <td><span class="badge-info">Veľký hráč</span></td>
+          </tr>
+          <tr>
+            <td>hornbach.sk</td>
+            <td>11</td>
+            <td>14,979</td>
+            <td>264,818</td>
+            <td>55</td>
+            <td><span class="badge-critical">Dominantný</span></td>
+          </tr>
+          <tr>
+            <td>dek.sk</td>
+            <td>10</td>
+            <td>2,192</td>
+            <td>36,107</td>
+            <td>47</td>
+            <td><span class="badge-info">Veľký hráč</span></td>
+          </tr>
+          <tr>
+            <td>modrastrecha.sk</td>
+            <td>10</td>
+            <td>4,365</td>
+            <td>32,251</td>
+            <td>41</td>
+            <td><span class="badge-info">Veľký hráč</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:18px; color:var(--dex-navy); margin-bottom:20px;">Organic Traffic — porovnanie</h3>
+
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">Hornbach</div>
+        <div class="bar-track">
+          <div class="bar-fill navy" style="width:100%">264,818</div>
+        </div>
+        <div class="bar-value">264,818</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">DEK</div>
+        <div class="bar-track">
+          <div class="bar-fill blue" style="width:14%">36,107</div>
+        </div>
+        <div class="bar-value">36,107</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Modrá strecha</div>
+        <div class="bar-track">
+          <div class="bar-fill blue" style="width:12%">32,251</div>
+        </div>
+        <div class="bar-value">32,251</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">eFarby</div>
+        <div class="bar-track">
+          <div class="bar-fill teal" style="width:7%">19,617</div>
+        </div>
+        <div class="bar-value">19,617</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Farlesk</div>
+        <div class="bar-track">
+          <div class="bar-fill teal" style="width:6%">15,758</div>
+        </div>
+        <div class="bar-value">15,758</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Stopvode</div>
+        <div class="bar-track">
+          <div class="bar-fill muted" style="width:1.5%"></div>
+        </div>
+        <div class="bar-value">1,817</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Izoluj.to</div>
+        <div class="bar-track">
+          <div class="bar-fill dashed" style="width:1%"></div>
+        </div>
+        <div class="bar-value">584</div>
+      </div>
+    </div>
+
+    <div class="highlight-negative">
+      Izoluj.to má 453× menej organic traffic ako Hornbach a 3× menej ako priamy konkurent Stopvode.sk (rovnaký DR 14, ale 3× väčší traffic).
+    </div>
+  </div>
+</section>
+
+<!-- ========== 11. BACKLINKY ========== -->
+<section class="section alt" id="backlinks">
+  <div class="container">
+    <h2 class="section-title">Backlink profil</h2>
+    <p class="section-sub">Analýza odkazového profilu izoluj.to</p>
+
+    <div class="metric-cards" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="metric-card">
+        <div class="label">Živé backlinky</div>
+        <div class="value">218 <span style="font-size:12px; color:var(--dex-muted); font-weight:400;">(z 6,000 all-time)</span></div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Referring Domains</div>
+        <div class="value">34 <span style="font-size:12px; color:#DC2626; font-weight:400;">(z 1,249 all-time — 97% stratených!)</span></div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Domain Rating</div>
+        <div class="value">12/100</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="severity-bar high"></div>
+      <div class="finding-content">
+        <div class="finding-title">Spam backlinky</div>
+        <div class="finding-desc">buybacklinks.agency, seoexpress.org, rank-your.site, rankyour.website, simplypsychology.org, amref.org — DISAVOW urgentný.</div>
+        <div class="rec-box">Vytvoriť disavow súbor a odoslať cez Google Search Console. Tieto domény môžu byť príčinou poklesu trafficu.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="severity-bar positive"></div>
+      <div class="finding-content">
+        <div class="finding-title">Kvalitné backlinky existujú</div>
+        <div class="finding-desc">pravda.sk (DR 78), ta3.com (DR 75), teraz.sk (DR 75), cas.sk (DR 74), tyzden.sk (DR 66), akcnezeny.sk (34 linkov, DR 61).</div>
+        <div class="rec-box">Budovať na existujúcich vzťahoch — stavebné portály, magazíny o bývaní.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 12. EXPANZIA — KEYWORD POTENCIÁL ========== -->
+<section class="section" id="expansion">
+  <div class="container">
+    <h2 class="section-title">Keyword potenciál — zahraničné trhy</h2>
+    <p class="section-sub">Analýza kľúčových slov pre CZ, PL a DE trhy</p>
+
+    <!-- ČESKO -->
+    <div class="cat-header">
+      <span class="flag">&#127464;&#127487;</span>
+      <h3>ČESKO (CZ)</h3>
+    </div>
+
+    <div class="table-scroll">
+      <table class="audit-table">
+        <thead>
+          <tr>
+            <th>Keyword</th>
+            <th>Volume</th>
+            <th>KD</th>
+            <th>CPC</th>
+            <th>Traffic Pot.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>hydroizolace</td>
+            <td>2,300</td>
+            <td>0</td>
+            <td>&#8364;0.20</td>
+            <td>350</td>
+          </tr>
+          <tr>
+            <td>epoxidova podlaha</td>
+            <td>2,000</td>
+            <td>1</td>
+            <td>&#8364;0.20</td>
+            <td>1,700</td>
+          </tr>
+          <tr>
+            <td>epoxidova sterka</td>
+            <td>600</td>
+            <td>0</td>
+            <td>&#8364;0.30</td>
+            <td>400</td>
+          </tr>
+          <tr>
+            <td>izolace strechy</td>
+            <td>500</td>
+            <td>1</td>
+            <td>&#8364;0.80</td>
+            <td>200</td>
+          </tr>
+          <tr>
+            <td>antikorozni nater</td>
+            <td>300</td>
+            <td>0</td>
+            <td>&#8364;0.25</td>
+            <td>80</td>
+          </tr>
+          <tr>
+            <td>epoxidovy nater</td>
+            <td>200</td>
+            <td>0</td>
+            <td>&#8364;0.25</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td>hydroizolace strechy</td>
+            <td>150</td>
+            <td>0</td>
+            <td>&#8364;0.60</td>
+            <td>250</td>
+          </tr>
+          <tr>
+            <td>hydroizolace balkonu</td>
+            <td>100</td>
+            <td>0</td>
+            <td>&#8364;0.35</td>
+            <td>90</td>
+          </tr>
+          <tr>
+            <td>samonivelacni poter</td>
+            <td>100</td>
+            <td>0</td>
+            <td>&#8364;0.10</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td>polyurea</td>
+            <td>80</td>
+            <td>0</td>
+            <td>&#8364;0.25</td>
+            <td>30</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight-positive">
+      CZ je najlogickejší prvý krok. Jazyk takmer zhodný = minimálne náklady na lokalizáciu. KD 0-1 na všetkých kľúčových slovách. Traffic potenciál 1,700 len pre "epoxidová podlaha".
+    </div>
+
+    <!-- POĽSKO -->
+    <div class="cat-header">
+      <span class="flag">&#127477;&#127473;</span>
+      <h3>POĽSKO (PL)</h3>
+    </div>
+
+    <div class="table-scroll">
+      <table class="audit-table">
+        <thead>
+          <tr>
+            <th>Keyword</th>
+            <th>Volume</th>
+            <th>KD</th>
+            <th>CPC</th>
+            <th>Traffic Pot.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>wylewka samopoziomujaca</td>
+            <td>22,000</td>
+            <td>0</td>
+            <td>&#8364;0.03</td>
+            <td>5,900</td>
+          </tr>
+          <tr>
+            <td>hydroizolacja</td>
+            <td>6,400</td>
+            <td>0</td>
+            <td>&#8364;0.15</td>
+            <td>30</td>
+          </tr>
+          <tr>
+            <td>hydroizolacja balkonu</td>
+            <td>4,000</td>
+            <td>0</td>
+            <td>&#8364;0.15</td>
+            <td>350</td>
+          </tr>
+          <tr>
+            <td>farba antykorozyjna</td>
+            <td>2,100</td>
+            <td>0</td>
+            <td>&#8364;0.10</td>
+            <td>800</td>
+          </tr>
+          <tr>
+            <td>podloga epoksydowa</td>
+            <td>1,300</td>
+            <td>0</td>
+            <td>&#8364;0.10</td>
+            <td>700</td>
+          </tr>
+          <tr>
+            <td>izolacja dachu</td>
+            <td>500</td>
+            <td>0</td>
+            <td>&#8364;0.40</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td>hydroizolacja dachu</td>
+            <td>350</td>
+            <td>0</td>
+            <td>&#8364;0.30</td>
+            <td>250</td>
+          </tr>
+          <tr>
+            <td>powloka epoksydowa</td>
+            <td>200</td>
+            <td>0</td>
+            <td>&#8364;0.10</td>
+            <td>250</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight-warning">
+      PL trh je 5.7× väčší ako SK. "Wylewka samopoziomująca" = 22,000/mes — obrovský potenciál. Ale vyžaduje plnú lokalizáciu do poľštiny + logistiku.
+    </div>
+
+    <!-- NEMECKO -->
+    <div class="cat-header">
+      <span class="flag">&#127465;&#127466;</span>
+      <h3>NEMECKO (DE)</h3>
+    </div>
+
+    <div class="table-scroll">
+      <table class="audit-table">
+        <thead>
+          <tr>
+            <th>Keyword</th>
+            <th>Volume</th>
+            <th>KD</th>
+            <th>CPC</th>
+            <th>Traffic Pot.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Epoxidharz Boden</td>
+            <td>16,000</td>
+            <td>0</td>
+            <td>&#8364;0.45</td>
+            <td>5,500</td>
+          </tr>
+          <tr>
+            <td>Flie&#223;estrich</td>
+            <td>6,000</td>
+            <td>0</td>
+            <td>&#8364;0.15</td>
+            <td>350</td>
+          </tr>
+          <tr>
+            <td>Korrosionsschutz</td>
+            <td>3,000</td>
+            <td>0</td>
+            <td>&#8364;0.70</td>
+            <td>350</td>
+          </tr>
+          <tr>
+            <td>Abdichtung</td>
+            <td>1,700</td>
+            <td>0</td>
+            <td>&#8364;1.40</td>
+            <td>40</td>
+          </tr>
+          <tr>
+            <td>Balkonabdichtung</td>
+            <td>1,300</td>
+            <td>0</td>
+            <td>&#8364;1.10</td>
+            <td>450</td>
+          </tr>
+          <tr>
+            <td>Dachabdichtung</td>
+            <td>1,100</td>
+            <td>0</td>
+            <td>&#8364;0.45</td>
+            <td>500</td>
+          </tr>
+          <tr>
+            <td>Polyurea</td>
+            <td>350</td>
+            <td>0</td>
+            <td>&#8364;1.40</td>
+            <td>50</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight-neutral">
+      DE je premium trh s najvyššími CPC (&#8364;0.45-1.40) = najvyššia hodnota organického trafficu. "Epoxidharz Boden" 16,000/mes s traffic potenciálom 5,500. Vyžaduje profesionálnu nemčinu a DE certifikácie.
+    </div>
+  </div>
+</section>
+
+<!-- ========== 13. HLAVNÉ ZISTENIA ========== -->
+<section class="section alt" id="findings">
+  <div class="container">
+    <h2 class="section-title">Hlavné zistenia</h2>
+    <p class="section-sub">Súhrn kľúčových nálezov z auditu</p>
+
+    <div class="finding">
+      <div class="severity-bar high"></div>
+      <div class="finding-content">
+        <div class="finding-title">Traffic pokles &#8722;64% za 4 mesiace</div>
+        <div class="finding-desc">Kritické, vyžaduje okamžitú diagnostiku</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="severity-bar high"></div>
+      <div class="finding-content">
+        <div class="finding-title">Spam backlinky</div>
+        <div class="finding-desc">30%+ referring domains sú spam, disavow urgentný</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="severity-bar high"></div>
+      <div class="finding-content">
+        <div class="finding-title">97% stratených referring domains</div>
+        <div class="finding-desc">Z 1,249 all-time zostalo len 34 živých</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="severity-bar med"></div>
+      <div class="finding-content">
+        <div class="finding-title">Blog nevyužitý</div>
+        <div class="finding-desc">Len 1 rankujúca blog stránka z celého webu</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="severity-bar med"></div>
+      <div class="finding-content">
+        <div class="finding-title">URL štruktúra neoptimalizovaná</div>
+        <div class="finding-desc">Dlhé, nečitateľné slugy</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="severity-bar med"></div>
+      <div class="finding-content">
+        <div class="finding-title">Žiadna cudzojazyčná verzia webu</div>
+        <div class="finding-desc">100% traffic z SK</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="severity-bar positive"></div>
+      <div class="finding-content">
+        <div class="finding-title">Silné pozície na core keywords</div>
+        <div class="finding-desc">"hydroizolácia" pos 3, 2× TOP 1</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 14. SUMMARY BOX ========== -->
+<section class="summary-section">
+  <div class="hero-circle hero-circle-1"></div>
+  <div class="hero-circle hero-circle-2"></div>
+  <h2>Celkové hodnotenie</h2>
+  <div class="summary-grid">
+    <div class="summary-item">
+      <div class="score">3/10</div>
+      <div class="title">SEO Zdravie</div>
+      <div class="desc">Kritický pokles, spam backlinky</div>
+    </div>
+    <div class="summary-item">
+      <div class="score">0/10</div>
+      <div class="title">Medzinárodné pokrytie</div>
+      <div class="desc">Žiadna CZ/PL/DE verzia</div>
+    </div>
+    <div class="summary-item">
+      <div class="score">6/10</div>
+      <div class="title">Content kvalita</div>
+      <div class="desc">Dobré produktové stránky, slabý blog</div>
+    </div>
+    <div class="summary-item">
+      <div class="score">8/10</div>
+      <div class="title">Expanzný potenciál</div>
+      <div class="desc">Nízka konkurencia, vysoký dopyt</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 15. ODPORÚČANIA ========== -->
+<section class="section" id="recommendations">
+  <div class="container">
+    <h2 class="section-title">Odporúčania</h2>
+    <p class="section-sub">Strategický postup v 4 krokoch</p>
+
+    <div class="rec-timeline">
+      <div class="rec-step">
+        <div class="step-label">Krok 1 — Urgentné (Tento mesiac)</div>
+        <div class="step-title">Stabilizácia SK trhu</div>
+        <div class="step-desc">Diagnostika poklesu trafficu v GSC. Disavow spam backlinkov. Technický SEO audit — indexácia, crawl errory, Core Web Vitals. Oprava kritických technických problémov.</div>
+      </div>
+      <div class="rec-step">
+        <div class="step-label">Krok 2 — Krátkodobé (1-3 mes)</div>
+        <div class="step-title">Rast na SK trhu</div>
+        <div class="step-desc">Content gaps analýza a nová blog stratégia. Push kľúčových keywords do TOP 3 (epoxidová podlaha, izolácia strechy). SK link building — stavebné portály, magazíny. Optimalizácia URL štruktúry.</div>
+      </div>
+      <div class="rec-step">
+        <div class="step-label">Krok 3 — Strednodobé (3-6 mes)</div>
+        <div class="step-title">CZ expanzia</div>
+        <div class="step-desc">CZ verzia webu — lokalizácia obsahu (minimálny effort, jazyk takmer zhodný). CZ PPC kampane na top keywords. CZ link building a PR. Monitoring a optimalizácia.</div>
+      </div>
+      <div class="rec-step">
+        <div class="step-label">Krok 4 — Dlhodobé (6-12 mes)</div>
+        <div class="step-title">PL a DE expanzia</div>
+        <div class="step-desc">PL a DE verzie webu s profesionálnou lokalizáciou. Partnerský program v každom trhu. Multi-country PPC kampane. Budovanie autority a backlinkov na všetkých trhoch.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 16. LOCKED SECTIONS ========== -->
+<section class="section alt">
+  <div class="container">
+    <div class="locked-banner">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Exkluzívne analýzy
+    </div>
+
+    <!-- Locked 1 -->
+    <div class="locked-card">
+      <div class="locked-content">
+        <div class="locked-blur">
+          Detailná analýza reálneho potenciálu trafficu pre všetky 4 trhy. Modelovanie scenárov rastu pri optimálnej SEO stratégii. Projekcia mesačného trafficu na 6 a 12 mesiacov. Porovnanie s benchmarkami v segmente stavebných materiálov. ROI kalkulácia pre každý trh jednotlivo aj v súčte.
+        </div>
+        <div class="locked-overlay">
+          <div class="lock-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#05024E" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <h3>Skutočný potenciál trafficu</h3>
+          <p>Detailný rozbor aký traffic by ste mali pri správnej stratégii</p>
+          <a class="unlock-badge" data-scroll="#pricing">Odomknúť &#8594;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Locked 2 -->
+    <div class="locked-card">
+      <div class="locked-content">
+        <div class="locked-blur">
+          Kompletná mapa nevyužitých keyword príležitostí naprieč všetkými trhmi. Gap analýza oproti každému konkurentovi. Prioritizácia podľa difficulty, volume a business relevancie. Content plán pre každé keyword cluster. Odhadované náklady na tvorbu obsahu pre každý trh.
+        </div>
+        <div class="locked-overlay">
+          <div class="lock-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#05024E" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <h3>Kde strácate príležitosti</h3>
+          <p>Mapa nevyužitých keyword príležitostí naprieč trhmi</p>
+          <a class="unlock-badge" data-scroll="#pricing">Odomknúť &#8594;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Locked 3 -->
+    <div class="locked-card">
+      <div class="locked-content">
+        <div class="locked-blur">
+          Personalizovaný 90-dňový akčný plán pre vašu firmu. Týždenný breakdown aktivít pre stabilizáciu SK trhu. Harmonogram CZ expanzie s míľnikmi. KPI metriky a success kritériá pre každú fázu. Odporúčaný budget a zdroje na implementáciu. Riziká a mitigačné stratégie.
+        </div>
+        <div class="locked-overlay">
+          <div class="lock-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#05024E" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <h3>Personalizovaný akčný plán</h3>
+          <p>90-dňový plán pre stabilizáciu SK + CZ expanziu</p>
+          <a class="unlock-badge" data-scroll="#pricing">Odomknúť &#8594;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 17. PRICING ========== -->
+<section class="pricing-section" id="pricing">
+  <div class="hero-circle hero-circle-1"></div>
+  <div class="hero-circle hero-circle-2"></div>
+  <div class="container">
+    <h2 style="text-align:center; font-size:28px; margin-bottom:40px; position:relative; z-index:1; font-family:var(--font-primary); color:var(--dex-white);">Cenová ponuka</h2>
+
+    <div class="pricing-context">
+      <div class="pricing-context-item">
+        <div class="ctx-value white">&#8364;158/mes</div>
+        <div class="ctx-label">Aktuálna hodnota org. trafficu</div>
+      </div>
+      <div class="pricing-context-item">
+        <div class="ctx-value orange">az &#8722;64%</div>
+        <div class="ctx-label">Pokles za 4 mesiace</div>
+      </div>
+      <div class="pricing-context-item">
+        <div class="ctx-value teal">&lt;2 mesiace</div>
+        <div class="ctx-label">Návratnosť setupu</div>
+      </div>
+    </div>
+
+    <div class="pricing-cards">
+      <!-- Card 1 -->
+      <div class="flip-card" id="card1">
+        <div class="flip-card-inner" id="card1inner">
+          <div class="flip-card-front">
+            <div class="card-title">Full Audit + konzultácia</div>
+            <div class="card-old-price">1 590&#8364;</div>
+            <div class="card-price">1 290&#8364;</div>
+            <div class="card-price-note">jednorazovo</div>
+            <ul class="card-features">
+              <li>Interný audit všetkých kanálov</li>
+              <li>SEO technický audit</li>
+              <li>Keyword stratégia pre 4 trhy</li>
+              <li>60min konzultácia</li>
+              <li>Akčný plán na 90 dní</li>
+            </ul>
+            <button class="btn btn-secondary" onclick="flipCard('card1inner')">Objednať audit</button>
+          </div>
+          <div class="flip-card-back">
+            <div class="card-title">Platobné údaje</div>
+            <div class="iban-box">
+              <div class="iban-label">IBAN</div>
+              <div class="iban-value">
+                <span id="iban1">SK18 0900 0000 0050 5804 0235</span>
+                <button class="copy-btn" onclick="copyIban('iban1')">Kopírovať</button>
+              </div>
+            </div>
+            <div class="iban-box" style="margin-bottom:8px;">
+              <div class="iban-label">Príjímateľ</div>
+              <div class="iban-value">Dexfinity s.r.o.</div>
+            </div>
+            <div class="iban-box" style="margin-bottom:16px;">
+              <div class="iban-label">Banka</div>
+              <div class="iban-value">Slovenská sporiteľňa</div>
+            </div>
+            <div class="process-box">
+              <strong>Po platbe:</strong>
+              1. Potvrdenie emailom do 24h<br>
+              2. Kick-off call na nastavenie prístupov<br>
+              3. Dodanie auditu do 10 prac. dní
+            </div>
+            <div class="contact-info">
+              hello@dex.sk<br>
+              +421 918 435 105
+            </div>
+            <button class="back-btn" onclick="flipCard('card1inner')">Späť na prehľad</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 (featured) -->
+      <div class="flip-card" id="card2">
+        <div class="flip-card-inner" id="card2inner">
+          <div class="flip-card-front featured">
+            <div class="featured-badge">Odporúčame</div>
+            <div class="card-title">Full Setup + správa</div>
+            <div class="card-old-price">2 090&#8364;</div>
+            <div class="card-price">1 690&#8364;</div>
+            <div class="card-price-note">setup + od 990&#8364;/mes</div>
+            <ul class="card-features">
+              <li>Všetko z auditu</li>
+              <li>Kompletné SEO nastavenie</li>
+              <li>CZ verzia webu</li>
+              <li>Link building SK+CZ</li>
+              <li>Mesačná správa a reporting</li>
+            </ul>
+            <button class="btn btn-primary" onclick="flipCard('card2inner')">Objednať setup</button>
+          </div>
+          <div class="flip-card-back">
+            <div class="card-title">Platobné údaje</div>
+            <div class="iban-box">
+              <div class="iban-label">IBAN</div>
+              <div class="iban-value">
+                <span id="iban2">SK18 0900 0000 0050 5804 0235</span>
+                <button class="copy-btn" onclick="copyIban('iban2')">Kopírovať</button>
+              </div>
+            </div>
+            <div class="iban-box" style="margin-bottom:8px;">
+              <div class="iban-label">Príjímateľ</div>
+              <div class="iban-value">Dexfinity s.r.o.</div>
+            </div>
+            <div class="iban-box" style="margin-bottom:16px;">
+              <div class="iban-label">Banka</div>
+              <div class="iban-value">Slovenská sporiteľňa</div>
+            </div>
+            <div class="process-box">
+              <strong>Po platbe:</strong>
+              1. Potvrdenie emailom do 24h<br>
+              2. Kick-off call na nastavenie prístupov<br>
+              3. Dodanie auditu do 10 prac. dní<br>
+              4. Štart mesačnej správy
+            </div>
+            <div class="contact-info">
+              hello@dex.sk<br>
+              +421 918 435 105
+            </div>
+            <button class="back-btn" onclick="flipCard('card2inner')">Späť na prehľad</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="pricing-note">*Celkové nastavenie analytiky sa nacení podľa výsledku kontroly auditu.</p>
+    <p class="pricing-contact">hello@dex.sk | <a href="tel:+421918435105">+421 918 435 105</a></p>
+  </div>
+</section>
+
+<!-- ========== 18. FOOTER ========== -->
+<footer class="footer">
+  <div class="hero-circle hero-circle-1"></div>
+  <div class="hero-circle hero-circle-2"></div>
+  <div style="position:relative; z-index:1;">
+    <img src="https://www.dexfinity.com/wp-content/uploads/2021/03/Logo-Small-Dark-Landscape@2x.png" alt="Dexfinity"><br>
+    <p>Izoluj.to — External Ads Audit &#8226; Apríl 2026</p>
+    <p>Dáta: Google Search Data and Trends</p>
+    <div class="go-beyond">Go Beyond</div>
+  </div>
+</footer>
+
+<!-- ========== JAVASCRIPT ========== -->
+<script>
+// Hamburger menu toggle
+function toggleMenu() {
+  var hamburger = document.querySelector('.hamburger');
+  var overlay = document.getElementById('mobileMenu');
+  hamburger.classList.toggle('active');
+  overlay.classList.toggle('active');
+  document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : '';
+}
+
+function closeMenu() {
+  var hamburger = document.querySelector('.hamburger');
+  var overlay = document.getElementById('mobileMenu');
+  hamburger.classList.remove('active');
+  overlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Close menu on nav link click (addEventListener, NOT inline onclick)
+document.querySelectorAll('.mobile-overlay a').forEach(function(link) {
+  link.addEventListener('click', closeMenu);
+});
+
+document.querySelectorAll('.nav-links a').forEach(function(link) {
+  link.addEventListener('click', closeMenu);
+});
+
+// Flip card
+function flipCard(id) {
+  document.getElementById(id).classList.toggle('flipped');
+}
+
+// Copy IBAN to clipboard
+function copyIban(id) {
+  var text = document.getElementById(id).textContent.trim();
+  navigator.clipboard.writeText(text).then(function() {
+    var btn = document.getElementById(id).nextElementSibling;
+    var original = btn.textContent;
+    btn.textContent = 'Skopírované!';
+    setTimeout(function() { btn.textContent = original; }, 2000);
+  });
+}
+
+// Locked section CTA scrolls to #pricing
+document.querySelectorAll('.unlock-badge[data-scroll]').forEach(function(badge) {
+  badge.addEventListener('click', function(e) {
+    e.preventDefault();
+    var target = document.querySelector(this.getAttribute('data-scroll'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
